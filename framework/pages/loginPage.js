@@ -11,7 +11,7 @@ class LoginPage extends BasePage{
         this.errorMessageSelector = '#app > div.no-auth-wrapper > div > section.content > div:nth-child(1) > div:nth-child(4) > div > div';
 
     }
-    async signin (username, password) {
+    async signIn (username, password) {
         await this.page.click(this.usernameField);
         await this.page.fill(this.usernameField, username);
         await this.page.click(this.passwordField);

@@ -3,19 +3,17 @@ import chai from 'chai';
 import {run, stop} from '../../lib/browser';
 import app from '../../framework/pages/indexClass';
 import {faker} from "@faker-js/faker";
+import {VALID_LOGIN, VALID_PASSWORD} from "../../framework/data/user";
 const expect = chai.expect;
 
-describe ('Авторизация', () => {
-    const VALID_LOGIN = 'demo';
-    const VALID_PASSWORD = 'demo';
-
+describe ('Задачи', () => {
     let page;
     let myApp;
 
     beforeEach( async () => {
         page = await run('https://try.vikunja.io/');
         myApp = app(page);
-        await myApp.Login().signin(VALID_LOGIN, VALID_PASSWORD);
+        await myApp.Login().signIn(VALID_LOGIN, VALID_PASSWORD);
     });
     afterEach(async() => {
         await stop();
