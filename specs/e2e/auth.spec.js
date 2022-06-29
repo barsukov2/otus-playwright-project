@@ -6,8 +6,6 @@ import {faker} from "@faker-js/faker";
 const assert = chai.assert;
 
 describe ('Авторизация', () => {
-    const ERROR_MESSAGE_FIELD = '#app > div.no-auth-wrapper > div > section.content > div:nth-child(1) > div:nth-child(4) > div > div'
-
     let page;
     let myApp;
 
@@ -22,20 +20,20 @@ describe ('Авторизация', () => {
     it ('Авторизоваться валидным пользователем', async () => {
         await myApp.Login().signin(VALID_LOGIN, VALID_PASSWORD);
         const profileNameText = await myApp.Home().getProfileName();
-        assert.strictEqual(profileNameText, 'demo', 'Имя пользователя равно demo');
+        assert.strictEqual(profileNameText, 'demo', 'Имя пользователя не равно demo');
     });
 
     it ('Авторизоваться невалидным пользователем', async () => {
         const string = faker.datatype.uuid()
         await myApp.Login().signin(string, string);
-        const errorText = await myApp.Login().getTextContent(ERROR_MESSAGE_FIELD)
+        const errorText = await myApp.Login().getErrorText()
         assert.strictEqual(errorText, 'Wrong username or password.', 'Сообщение об ошибке');
     });
 
     it ('Выйти залогиненным пользователем', async () => {
         await myApp.Login().signin(VALID_LOGIN, VALID_PASSWORD);
         await myApp.Home().logout();
-        const url = await myApp.Login().getUrl()
-        assert.strictEqual(url, 'https://try.vikunja.io/login', 'Мы на странице /login');
+        const url = await myApp.Login().getUrl();
+        assert.strictEqual(url, 'https://try.vikunja.io/login', 'Мы не на странице /login');
     });
 });

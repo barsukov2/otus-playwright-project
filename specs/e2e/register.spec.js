@@ -20,6 +20,6 @@ describe ('Регистрация', () => {
         const string = faker.datatype.uuid()
         await myApp.Register().signUp(string, string + "@demo.com", string)
         const profileNameText = await myApp.Home().getProfileName();
-        assert.strictEqual(profileNameText, string, 'Имя пользователя равно логину');
+        assert.strictEqual(profileNameText, string, 'Имя пользователя не равно логину');
     });
 });

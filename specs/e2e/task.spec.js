@@ -22,9 +22,9 @@ describe ('Авторизация', () => {
     });
 
     it ('Создать задачу', async () => {
-        const string = faker.datatype.uuid()
-        await myApp.Home().addTask(string)
-        let currentTasksList = await myApp.Home().getCurrentTasksList()
+        const string = faker.datatype.uuid();
+        await myApp.Home().addTask(string);
+        let currentTasksList = await myApp.Home().getCurrentTasksList();
         expect(currentTasksList).to.contain(string);
     });
 });
